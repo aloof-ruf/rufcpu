@@ -2,16 +2,16 @@
 
 /* Goal
 
-	RUF CPU is a program that pretends to be a CPU and memory. The idea is to have 
+	RUF CPU is a program that pretends to be a CPU and memory. The idea is to have
 a very simple instruction set that will allow me to experiment with translators.
 It is intended strictly for learning and experimentation purposes and has no practical
-application what-so-ever. 
+application what-so-ever.
 
 */
 
 /* instruction set
-	
-	0000 NOP [4-15] 0's   
+
+	0000 NOP [4-15] 0's
 	0001 ADD [4-7] destination register [8-11] first register [12-15] second register
 	0010 ADD [4-7] destination register [8-11] register to add to [12-15] 4 bit number
 	0011 SET [4-7] destination register [8-15] 8 bit number
@@ -242,7 +242,7 @@ void printregisters(unsigned short* registers, unsigned short registercount){
 	printf("r0:%d\tr1:%d\tr2:%d\tr3:%d\t\n"
 			"r4:%d\tr5:%d\tr6:%d\tr7:%d\t\n"
 			"r8:%d\tr9:%d\tr10:%d\tr11:%d\t\n"
-			"r12:%d\tr13:%d\tr14:%d\tr15:%d\t\n", 
+			"r12:%d\tr13:%d\tr14:%d\tr15:%d\t\n",
 			registers[0], registers[1], registers[2], registers[3],
 			registers[4], registers[5], registers[6], registers[7],
 			registers[8], registers[9], registers[10], registers[11],

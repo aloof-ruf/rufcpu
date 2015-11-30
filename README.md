@@ -41,7 +41,13 @@ The "memory" contains 2^16 (0 - 65535 inclusive) 16-bit wide addresses. Thus, yo
 1010 XOR [4-7] destination register [8-11] first register [12-15] second register
 1011 OR  [4-7] destination register [8-11] first register [12-15] second register
 1100 AND [4-7] destination register [8-11] first register [12-15] second register
-1101 PRT [4-7] register holding character to print
+
+1101 PRT [4-7] register holding address of starting character to print
+
+ - Print. Goes to the address given by the value of the specified register and
+ prints characters until it hits the null character (16 zero's).
+
+ ex) prt rA
 
 1110 ---
 
@@ -52,20 +58,58 @@ The "memory" contains 2^16 (0 - 65535 inclusive) 16-bit wide addresses. Thus, yo
 
  - Stop Execution. This stops your program's execution.
 
+# Ruf Assembly (.rpu files)
+Ruf Assembly is intended to emulate an actual assembly language and, as such,
+contains many of the features one would expect from an assembly language. This
+includes instruction and register mneumonics, address labels, literals, etc.
+
+## Comments
+Comments are intended to describe sections of code. Anything placed after (and
+including) a semi-colon (;) and before a new line is considered a comment.
+
+ex) add r1 r2 r3 ; add the values in register 3 to register 2 and put it in register 1
+
+There is no multiline commenting available.
+
+## Registers
+Registers are specified according to their hex-code. They are not case-sensitive.
+
+ex) add rc rF R2 ; add the value in register 2 to register 15 and put it in register 12
+
+## Address Labels
+
+## Literals
+There are two types of literals: numbers and strings.
+
+A number literal can be used with the ADD and SET commands. For ADD, the literal
+may only be the final argument and may only be a 4-bit two's compliment number (
+-8 to 7 inclusive). For SET, the literal is the second argument. It may be any
+8-bit two's compliment number (-128 to 127 inclusive).
+
+ex) add r1 r1 -4
+ex) set re 100
+
+A string literal is used in conjunction with STR to fill addresses with the
+appropriate character code. Characters are limited to the 256 characters defined
+in the ASCII table (sorry, no unicode).
+
+ex) STR "Hello, World!" ; this and the following addresses will be replaced by
+                        ; the character's ASCII encoding followed by a null character
+
 # Versions
 
 ## V0.* Goals
 
-### V0.1
+V0.1
  - Be able to run an arbitrary instruction set via a command-line program.
-### V0.2
+V0.2
  - Create a two-pass assembler for the arbitrary instruction set.
-### V0.3
+V0.3
  - Create a 'high-level' language (why not 'ruf-C?') and an appropriate compiler.
  - Only handle one higher-language program at a time
-### V0.4
+V0.4
  - Create linkers, loaders, etc. for higher-level language.
-### V0.5 ?
+V0.5 ?
  - Create a more dynamic high-level language for instruction set.
  (Lisp-y? or Python-y?)
 
